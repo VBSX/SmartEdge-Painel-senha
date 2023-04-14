@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import requests
-
+from waitress import serve
 app = Flask(__name__)
 
 queue = []
@@ -70,3 +70,6 @@ def call_ticket():
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
+# if __name__ == "__main__":
+
+#     serve(app, host="0.0.0.0", port=5000)
