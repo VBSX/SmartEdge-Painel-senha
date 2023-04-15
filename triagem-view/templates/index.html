@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Adicionar Fila</title>
+    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <style>
-        /* Estilos CSS para o formulário */
         .form-container {
             max-width: 400px;
             margin: 0 auto;
@@ -12,7 +12,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
+        h1 {
+            background-color: #2F55E0;
+            color: #fff;
+            padding: 10px;
+            margin-top: 21px;
+        }
         .form-container h2 {
             text-align: center;
         }
@@ -24,7 +29,7 @@
 
         .form-container input[type="submit"] {
             margin-top: 10px;
-            background-color: #007bff;
+            background-color: #2F55E0;
             color: #fff;
             border: none;
             padding: 10px;
@@ -32,7 +37,6 @@
             cursor: pointer;
         }
               
-        /* Estilo para o botão de menu */
         .menu {
             position: relative;
             display: inline-block;
@@ -41,7 +45,7 @@
         }
 
         .menu button {
-            background-color: #007bff;
+            background-color: #2F55E0;
             color: #fff;
             border: none;
             cursor: pointer;
@@ -72,19 +76,19 @@
         }
   
     .mensagem-sucesso {
-        background-color: #4CAF50; /* Cor de fundo verde */
-        color: #fff; /* Cor do texto branco */
-        padding: 10px; /* Espaçamento interno de 10 pixels */
-        margin-top: 10px; /* Espaçamento superior de 10 pixels */
+        background-color: #4CAF50; 
+        color: #fff; 
+        padding: 10px; 
+        margin-top: 10px; 
     }
 
     #header {
-        text-align: center; /* Centraliza o conteúdo horizontalmente */
-        margin-top: 20px; /* Espaçamento superior de 20 pixels */
+        text-align: center; 
+        margin-top: 20px; 
     }
 
     #header img {
-        max-width: 10%; /* Garante que a imagem não ultrapasse a largura máxima do contêiner */
+        max-width: 10%; 
     }
 
     </style>
@@ -97,12 +101,18 @@
         </div>
     </header>
 
-    <div class="menu">
-        <button>Menu &#9776;</button>
-        <div class="menu-content">
-            <a href="/queue">Fila</a>
+    <div id="line-menu">
+        <div class="menu">
+            <button>Menu &#9776;</button>
+            <div class="menu-content">
+                <a href="/queue">Fila</a>
+            </div>
+        </div>
+        <div>
+            <h1>Gerar Senha</h1>
         </div>
     </div>
+    
     <div class="form-container">
         <h2>Colocar na Fila</h2>
         <form method="post" action="/" id="form-adicionar-fila">

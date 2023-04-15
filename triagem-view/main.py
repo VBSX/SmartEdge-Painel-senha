@@ -1,5 +1,5 @@
-from flask import Flask, request, Response,send_from_directory,render_template, redirect
-from waitress import serve
+from flask import Flask, request, render_template, redirect, url_for,send_from_directory
+import os
 import requests
 
 app = Flask(__name__)
@@ -7,6 +7,11 @@ app.static_folder = 'static'
 # Variável global para armazenar o conteúdo da senha chamada
 displayed_content = None
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # 1 MB
+
+#Rota para servir o arquivo de imagem do favicon
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 def queue_add(name, document):
     payload=f'name={name}&document_number={document}'
@@ -62,6 +67,7 @@ def index():
 
 if __name__ == '__main__':
     app.run(port=5002, debug=True)
+    
 # if __name__ == "__main__":
 
 #     serve(app, host="0.0.0.0", port=5001)

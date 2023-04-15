@@ -13,11 +13,12 @@
 
         /* Estilo para o cabeçalho */
         h1 {
-            background-color: #007bff;
+            background-color: #2F55E0;
             color: #fff;
             padding: 10px;
+            margin-top: 21px;
         }
-
+   
         /* Estilo para a tabela */
         table {
             width: 100%;
@@ -44,7 +45,7 @@
         }
 
         .menu button {
-            background-color: #007bff;
+            background-color: #2F55E0;
             color: #fff;
             border: none;
             cursor: pointer;
@@ -109,14 +110,18 @@
             <img src="{{ url_for('static', filename='images/smartedge.png') }}" alt="Logo" />
         </div>
     </header>
-
-    <div class="menu">
-        <button>Menu &#9776;</button>
-        <div class="menu-content">
-            <a href="/">Home</a>
+    <div id="line-menu">
+        <div class="menu">
+            <button>Menu &#9776;</button>
+            <div class="menu-content">
+                <a href="/">Home</a>
+            </div>
+        </div>
+        <div>
+            <h1>Fila</h1>
         </div>
     </div>
-    <h1>Fila</h1>
+    
     <table>
         <tr>
             <th>Nome</th>
