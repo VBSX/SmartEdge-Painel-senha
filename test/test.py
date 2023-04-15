@@ -29,5 +29,6 @@ def chamar_senha():
 criar_senha()
 
 chamar_senha()
+sleep(2)
     
     

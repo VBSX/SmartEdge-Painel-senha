@@ -1,0 +1,144 @@
+<!-- queue.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fila</title>
+    <style>
+        /* Reset de margens e preenchimentos */
+        body, h1, table {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo para o cabeçalho */
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+        }
+
+        /* Estilo para a tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilo para o botão de menu */
+        .menu {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .menu button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .menu:hover .menu-content {
+            display: block;
+        }
+
+        .menu-content a {
+            display: block;
+            padding: 5px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .menu-content a:hover {
+            background-color: #ddd;
+        }
+
+        /* Estilos responsivos */
+        @media screen and (max-width: 600px) {
+            .menu {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .menu-content {
+                position: static;
+                display: block;
+                background-color: transparent;
+                padding: 0;
+            }
+
+            .menu:hover .menu-content {
+                display: none;
+            }
+        }
+    #header {
+        text-align: center; /* Centraliza o conteúdo horizontalmente */
+        margin-top: 20px; /* Espaçamento superior de 20 pixels */
+    }
+
+    #header img {
+        max-width: 10%; /* Garante que a imagem não ultrapasse a largura máxima do contêiner */
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header">
+            <img src="{{ url_for('static', filename='images/smartedge.png') }}" alt="Logo" />
+        </div>
+    </header>
+
+    <div class="menu">
+        <button>Menu &#9776;</button>
+        <div class="menu-content">
+            <a href="/">Home</a>
+        </div>
+    </div>
+    <h1>Fila</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>Número da Senha</th>
+            <th>Ação</th>
+        </tr>
+        {% for item in queue_data %}
+        <tr>
+            <td>{{ item['name'] }}</td>
+            <td>{{ item['document_number'] }}</td>
+            <td>{{ item['ticket_number'] }}</td>
+            <td>
+                <form action="/call" method="post">
+                    <input type="hidden" name="name" value="{{ item['name'] }}">
+                    <input type="hidden" name="document_number" value="{{ item['document_number'] }}">
+                    <input type="hidden" name="ticket_number" value="{{ item['ticket_number'] }}">
+                    <input type="submit" value="Chamar">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
