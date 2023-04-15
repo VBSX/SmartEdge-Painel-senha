@@ -1,0 +1,1 @@
+# SmartEdge-Painel-senha
