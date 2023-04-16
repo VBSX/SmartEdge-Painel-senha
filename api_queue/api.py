@@ -7,6 +7,7 @@ import requests
 class ApiQueue(Flask):
     def __init__(self,ip):
         super().__init__(__name__)
+        self.url = f'http://{ip}:5001/display'
         self.route('/queue', methods=['GET'])(self.get_queue)
         self.route('/queue', methods=['POST'])(self.emit_ticket)
         self.route('/call', methods=['POST'])(self.call_ticket)
@@ -56,9 +57,9 @@ class ApiQueue(Flask):
         if ticket_index is not None:
             # Remover o ticket da fila
             ticket = self.queue.pop(ticket_index)
-
+            
             # Fazer chamada à outra API para mostrar o conteúdo na tela
-            display_response = requests.post('http://localhost:5001/display', json={'name': name, 'document_number': document_number,
+            display_response = requests.post(self.url, json={'name': name, 'document_number': document_number,
                                                                                     'ticket_number':ticket_number})
             if display_response.status_code == 200:
                 return jsonify({'message': 'Senha chamada com sucesso e conteúdo mostrado na tela.'}), 200
@@ -68,7 +69,7 @@ class ApiQueue(Flask):
             return jsonify({'error': f'Senha com nome "{name}" não encontrada na fila.'}), 404
 
 if __name__ == '__main__':
-    app = ApiQueue(ip="")
+    app = ApiQueue(ip="localhost")
     app.run(port=5000, debug=True)
 # if __name__ == "__main__":
 

@@ -9,6 +9,7 @@ import requests
 class TriageQueue(Flask):
     def __init__(self,ip):
         super().__init__(__name__)
+        self.ip = ip
         self.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # 1 MB
         self.static_dir = '/static'
         #Rota para servir o arquivo de imagem do favicon
@@ -22,7 +23,7 @@ class TriageQueue(Flask):
 
     def queue_add(self,name, document):
         payload=f'name={name}&document_number={document}'
-        url = "http://127.0.0.1:5000/queue"
+        url = f"http://{self.ip}:5000/queue"
         headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -32,7 +33,7 @@ class TriageQueue(Flask):
             return 200
         
     def view_queue(self):
-        url = "http://127.0.0.1:5000/queue"
+        url = f"http://{self.ip}:5000/queue"
         response = requests.request("GET", url)
         queue_data = response.json() 
 
@@ -41,7 +42,7 @@ class TriageQueue(Flask):
     def call_in_panel_view(self):
         name = request.form['name']
         ticket_number = request.form['document_number']
-        url = "http://127.0.0.1:5000/call"
+        url = f"http://{self.ip}:5000/call"
 
         payload=f'name={name}&document_number={ticket_number}'
         headers = {
@@ -64,7 +65,7 @@ class TriageQueue(Flask):
         return render_template('index.html')
 
 if __name__ == '__main__':
-    app = TriageQueue(ip="")
+    app = TriageQueue(ip="localhost")
     app.run(port=5002, debug=True)
 # if __name__ == "__main__":
 
