@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   </a>
-<img src="visualizador-senha/static/images/smartedge.png" alt='Logo-Smart-edge' width="200px" ></img>
+<img src="github/images/smartedge.png" alt='Logo-Smart-edge' width="200px" ></img>
   </a>
 
   <h3 align="center">queue management system</h3>
@@ -28,14 +28,14 @@ Is used an API builded in Flask to register new ticket on queue and call the nex
 * [Python](https://python.org)
 
 ---
-### web queue screening
+### web queue triage
 Here is where we can put the person's data so we can call later.
 
 <br />
 
 <p align="center">
 </a>
-<img src="github/images/screening.png" alt='Logo-Smart-edge' width="700px" ></img>
+<img src="github/images/triage.png" alt='Logo-Smart-edge' width="700px" ></img>
 </a>
 </p>
 <br />
@@ -46,7 +46,7 @@ After that we can see the generated tickt for the person, we can call the tickt 
 
 <p align="center">
 </a>
-<img src="github/images/queue-screening-web.png" alt='Logo-Smart-edge' width="700px" ></img>
+<img src="github/images/queue-triage-web.png" alt='Logo-Smart-edge' width="700px" ></img>
 </a>
 </p>
 
