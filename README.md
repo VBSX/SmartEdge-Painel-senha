@@ -17,6 +17,10 @@
 ## About The Project
 this project allows you to generate tickets for a person, with their name and document number, so that you can call the panel, as needed at the moment, when making the call, it is automatically redirected to the ticket visualization panel, so playing a sound effect to let the person know you called them.
 
+<br />
+
+Is used an API builded in Flask to register new ticket on queue and call the next person on queue.
+
 ---
 
 ### Built With
@@ -46,8 +50,12 @@ After that we can see the generated tickt for the person, we can call the tickt 
 </a>
 </p>
 
+---
+
 ### web queue view
 After we call the ticket, we have to see the ticket called and to see that have the web queue view, here is where we can see the ticked number and the name of person called. After each ticked called, have a song effect to alert that web panel is calling someone.
+
+<br />
 
 <p align="center">
 </a>
