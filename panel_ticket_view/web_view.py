@@ -33,7 +33,6 @@ class DisplayApp(Flask):
         sleep(0.1)
         response = Response(generate(), mimetype="text/event-stream")
         response.headers['Cache-Control'] = 'no-cache'
-        response.headers['Connection'] = 'keep-alive'
         return response
 
     def serve_static(self, filename):
@@ -50,6 +49,7 @@ class DisplayApp(Flask):
 
     def index_redirect(self):
         return redirect('/display/painel')
+    
 if __name__ == '__main__':
     app = DisplayApp('', '')
     app.run(port=5001, debug=True)

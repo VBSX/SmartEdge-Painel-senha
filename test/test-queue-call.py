@@ -3,7 +3,7 @@ from time import sleep
 
 
 def criar_senha():
-    url = "http://127.0.0.1:5000/queue"
+    url = "http://localhost:5000/queue"
 
     payload='name=cleber&document_number=123'
     headers = {
@@ -15,7 +15,7 @@ def criar_senha():
     print(response.text)
 
 def chamar_senha():
-    url = "http://127.0.0.1:5000/call"
+    url = "http://localhost:5000/call"
 
     payload='name=cleber&document_number=123'
     headers = {

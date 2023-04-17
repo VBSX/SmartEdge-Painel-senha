@@ -55,7 +55,6 @@ class TriageQueue(Flask):
         if request.method == 'POST':
             nome = request.form['nome']
             documento = request.form['documento']
-            # Lógica para colocar os dados na fila
             self.queue_add(nome,documento)
             return render_template('index.html', sucesso=True, nome=nome)
         return render_template('index.html')

@@ -44,7 +44,7 @@ class ApiQueue(Flask):
         data = request.form
         name = data.get('name')
         document_number = data.get('document_number')
-
+        
         # Procurar o ticket na fila pelo nome
         ticket_index = None
         for i, ticket in enumerate(self.queue):
@@ -52,7 +52,7 @@ class ApiQueue(Flask):
                 ticket_index = i
                 ticket_number = ticket['ticket_number']
                 break
-
+            
         if ticket_index is not None:
             # Remover o ticket da fila
             ticket = self.queue.pop(ticket_index)
@@ -63,6 +63,11 @@ class ApiQueue(Flask):
                 'document_number': document_number,
                 'ticket_number':ticket_number})
             if display_response.status_code == 200:
+                with open('tickets.txt','a') as file:
+                    
+                    file.write(f'\nname:{name}/document_number:{document_number}')
+                    file.close()
+                    
                 return jsonify({'message': 'Senha chamada com sucesso e conteúdo mostrado na tela.'}), 200
             else:
                 return jsonify({'error': 'Erro ao chamar a senha ou mostrar o conteúdo na tela.'}), 500
