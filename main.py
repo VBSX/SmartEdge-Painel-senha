@@ -14,7 +14,6 @@ ticket_visualizator = DisplayApp('', '')
 ticketing_and_queue_manager = TriageQueue(ip=ip_machine)
 api_server = ApiQueue(ip=ip_machine)
 
-
 def start_api_server():
     if debug_server:
         api_server.run(port=5000, debug=True)

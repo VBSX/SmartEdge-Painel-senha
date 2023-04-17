@@ -74,6 +74,16 @@
         .menu-content a:hover {
             background-color: #ddd;
         }
+        .image-git{
+        color: #25D366;
+        height: 32px;
+        font-weight: bold;
+        margin: 32px;
+
+        margin-left: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        }
 
         /* Estilos responsivos */
         @media screen and (max-width: 600px) {
@@ -135,7 +145,7 @@
             <td>{{ item['document_number'] }}</td>
             <td>{{ item['ticket_number'] }}</td>
             <td>
-                <form action="/call" method="post">
+                <form onsubmit="return processarFormulario(this)">
                     <input type="hidden" name="name" value="{{ item['name'] }}">
                     <input type="hidden" name="document_number" value="{{ item['document_number'] }}">
                     <input type="hidden" name="ticket_number" value="{{ item['ticket_number'] }}">
@@ -145,5 +155,18 @@
         </tr>
         {% endfor %}
     </table>
+    <footer>
+        <div style="margin-bottom:50px;">
+            <div class="image-git">
+                <img src="static/images/github.png" alt="git" class="image-git">
+                    <a href="https://www.github.com/vbsx/" class="image-git" target="_blank">
+                    More Projects >
+                    </a>
+                
+                    <p class="image-git">Copyright ©2023 SmartEdge - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+    <script src="static/call_ticket.js"></script>
 </body>
 </html>

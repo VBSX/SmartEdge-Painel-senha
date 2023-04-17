@@ -12,8 +12,8 @@ class DisplayApp(Flask):
         super().__init__(__name__)
         self.name = name
         self.ticket_number = ticket_number
-        self.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # 1 MB
         self.static_dir = '/static'
+        self.config['SEND_FILE_MAX_AGE_DEFAULT'] = 300
         self.route('/favicon.ico')(self.favicon)
         self.route('/display')(self.send_content)
         self.route('/static/<path:filename>')(self.serve_static)
@@ -28,7 +28,7 @@ class DisplayApp(Flask):
         def generate():
             while True:
                 content = f'{self.name}:{self.ticket_number}'
-                sleep(1)
+                sleep(0.1)
                 yield f"data: {content}\n\n"
         sleep(0.1)
         response = Response(generate(), mimetype="text/event-stream")

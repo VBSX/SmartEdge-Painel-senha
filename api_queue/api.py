@@ -40,7 +40,6 @@ class ApiQueue(Flask):
         # Verificar se a fila está vazia
         if not self.queue:
             return jsonify({'error': 'A fila está vazia.'}), 404
-
         # Obter os dados do nome e número do documento do corpo da requisição
         data = request.form
         name = data.get('name')
@@ -49,7 +48,7 @@ class ApiQueue(Flask):
         # Procurar o ticket na fila pelo nome
         ticket_index = None
         for i, ticket in enumerate(self.queue):
-            if ticket['name'] == name:
+            if ticket['name'] == name and document_number == ticket['document_number']:
                 ticket_index = i
                 ticket_number = ticket['ticket_number']
                 break
@@ -59,15 +58,17 @@ class ApiQueue(Flask):
             ticket = self.queue.pop(ticket_index)
             
             # Fazer chamada à outra API para mostrar o conteúdo na tela
-            display_response = requests.post(self.url, json={'name': name, 'document_number': document_number,
-                                                                                    'ticket_number':ticket_number})
+            display_response = requests.post(self.url, json={
+                'name': name,
+                'document_number': document_number,
+                'ticket_number':ticket_number})
             if display_response.status_code == 200:
                 return jsonify({'message': 'Senha chamada com sucesso e conteúdo mostrado na tela.'}), 200
             else:
                 return jsonify({'error': 'Erro ao chamar a senha ou mostrar o conteúdo na tela.'}), 500
         else:
             return jsonify({'error': f'Senha com nome "{name}" não encontrada na fila.'}), 404
-
+        
 if __name__ == '__main__':
     app = ApiQueue(ip="localhost")
     app.run(port=5000, debug=True)

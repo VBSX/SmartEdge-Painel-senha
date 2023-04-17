@@ -3,18 +3,21 @@ from flask import (
     request,
     render_template,
     redirect,
-    send_from_directory)
+    send_from_directory,
+    url_for)
 import requests
 
 class TriageQueue(Flask):
     def __init__(self,ip):
         super().__init__(__name__)
         self.ip = ip
-        self.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024  # 1 MB
+        self.url_api_get_queue = f"http://{self.ip}:5000/queue"
+        self.url_call_api = f"http://{self.ip}:5000/call"
         self.static_dir = '/static'
+        self.config['SEND_FILE_MAX_AGE_DEFAULT'] = 300
         #Rota para servir o arquivo de imagem do favicon
         self.route('/favicon.ico')(self.favicon)
-        self.route('/queue', methods=['GET', 'POST'])(self.view_queue)
+        self.route('/queue', methods=['GET'])(self.view_queue)
         self.route('/call', methods=['POST'])(self.call_in_panel_view)
         self.route('/', methods=['GET', 'POST'])(self.index)
 
@@ -23,34 +26,27 @@ class TriageQueue(Flask):
 
     def queue_add(self,name, document):
         payload=f'name={name}&document_number={document}'
-        url = f"http://{self.ip}:5000/queue"
+        
         headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
         }
-        response_server = requests.request("POST", url, headers=headers, data=payload)
-        if response_server:
-            
-            return 200
+        requests.request("POST", self.url_api_get_queue, headers=headers, data=payload)
         
     def view_queue(self):
-        url = f"http://{self.ip}:5000/queue"
-        response = requests.request("GET", url)
+        response = requests.request("GET", self.url_api_get_queue)
         queue_data = response.json() 
-
         return render_template('queue.html', queue_data=queue_data)
 
     def call_in_panel_view(self):
         name = request.form['name']
         ticket_number = request.form['document_number']
-        url = f"http://{self.ip}:5000/call"
-
         payload=f'name={name}&document_number={ticket_number}'
         headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
         }
-        response = requests.request("POST", url, headers=headers, data=payload)
-        return redirect('/queue') 
-
+        requests.request("POST", self.url_call_api, headers=headers, data=payload)
+        return redirect(url_for('view_queue'))
+        
     def index(self):
         """
         Configuração da página inicial(Index)
