@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizador senhas</title>
+    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #E0B22F;
+        }
+
+        .text-informations{
+            color: #6385FF;
+            font-weight: bold;
+            margin-bottom: 50px;
+            font-size: 2em;
+            
+        }
+        header{
+            margin-top: 20px;
+            display: flex;
+            background-color: white;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        #content {
+            margin-top: 50px;
+            font-size:25px;
+            border: solid;
+            border-color: #212529;
+            padding-top: 30px;
+            border-radius: 20px;
+            background-color: white;
+            width: 50%;
+            display: flow-root;
+
+            margin: 0 auto;
+        }
+        #image-logo img{
+            margin: 0;
+            max-width: 164px;
+            min-width: 164px;
+        }
+        #image-logo{
+            width: 30%;
+        }
+        .content-item {
+            margin-bottom: 10px;
+        }
+        #name-content{
+            color: #6385FF;
+            font-size:50px;
+
+        }
+        #ticket-content{
+            color: #6385FF;
+            font-size:50px;
+
+        }
+        #div-text-informations{
+            display: grid;
+            width: 100%;
+            justify-content: left;
+
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script> 
+    <script src="/static/painel_exibicao.js">
+    </script>
+
+</head>
+<body>
+    <header>
+        <div id="image-logo">
+            <img src="{{ url_for('static', filename='images/smartedge.png') }}" alt="Logo" />
+        </div>
+        <div id="div-text-informations">
+            <h1 class="text-informations">Seja Bem-vindo</h1>
+        </div>
+    </header>
+
+
+    <div id="content"></div>
+
+    <!-- Adicione o elemento de áudio -->
+    <audio id="audio" src="/static/bingbong.mp3"></audio>
+
+</body>
+</html>
