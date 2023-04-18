@@ -35,7 +35,7 @@ Here is where we can put the person's data so we can call later.
 
 <p align="center">
 </a>
-<img src="github/images/triage.png" alt='Logo-Smart-edge' width="700px" ></img>
+<img src="github/images/screening.png" alt='Logo-Smart-edge' width="700px" ></img>
 </a>
 </p>
 <br />
