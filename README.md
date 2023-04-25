@@ -63,3 +63,25 @@ After we call the ticket, we have to see the ticket called and to see that have 
 </a>
 </p>
 
+---
+
+### Totem Smartphone
+
+This can be used to user get your password, generating with your name and document number,
+
+<br>
+<p align="center">
+</a>
+<img src="github/images/ticket_totem_smartphone.png" alt='Logo-Smart-edge' width="700px" ></img>
+</a>
+<br>
+
+</p> after that the person get acess to a panel that only she, who generate the ticket can view, when the password is called and the ticket that is holding is equal to what is called, the screen begin to pulse to alert the user.
+
+
+<br>
+
+<p align="center">
+</a>
+<img src="github/images/ticket_view_smartphone.png" alt='Logo-Smart-edge' width="700px" ></img>
+</a>
