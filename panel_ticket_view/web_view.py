@@ -28,7 +28,7 @@ class DisplayApp(Flask):
         def generate():
             while True:
                 content = f'{self.name}:{self.ticket_number}'
-                sleep(0.1)
+                sleep(0.7)
                 yield f"data: {content}\n\n"
         sleep(0.1)
         response = Response(generate(), mimetype="text/event-stream")
@@ -50,6 +50,7 @@ class DisplayApp(Flask):
     def index_redirect(self):
         return redirect('/display/painel')
     
+
 if __name__ == '__main__':
     app = DisplayApp('', '')
     app.run(port=5001, debug=True)

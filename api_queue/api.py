@@ -7,7 +7,8 @@ import requests
 class ApiQueue(Flask):
     def __init__(self,ip):
         super().__init__(__name__)
-        self.url = f'http://{ip}:5001/display'
+        self.url_panel_desktop = f'http://{ip}:5001/display'
+        self.url_panel_smartphone = f'http://{ip}:5003/display'
         self.route('/queue', methods=['GET'])(self.get_queue)
         self.route('/queue', methods=['POST'])(self.emit_ticket)
         self.route('/call', methods=['POST'])(self.call_ticket)
@@ -17,20 +18,25 @@ class ApiQueue(Flask):
     def get_queue(self):
         return jsonify(self.queue)
 
+
     def emit_ticket(self):
         self.current_ticket_number
         name = request.form.get('name')
         document_number = request.form.get('document_number')
         if not name or not document_number:
             return jsonify({'error': 'Name and document number are required'}), 400
-        ticket = {
-            'ticket_number': f'T{self.current_ticket_number}',
-            'name': name,
-            'document_number': document_number
-        }
-        self.current_ticket_number += 1
-        self.queue.append(ticket)
-        return jsonify({'ticket': ticket})
+        if name in [ticket['name'] for ticket in self.queue] and document_number in [ticket['document_number'] for ticket in self.queue]:
+            return jsonify({'error': 'Nome Ou numero do documento já está na fila'}), 400
+           
+        else:
+            ticket = {
+                'ticket_number': f'T{self.current_ticket_number}',
+                'name': name,
+                'document_number': document_number
+            }
+            self.current_ticket_number += 1
+            self.queue.append(ticket)
+            return jsonify({'ticket': ticket}), 200
 
     #Função para chamar uma senha
     def call_ticket(self):
@@ -58,10 +64,15 @@ class ApiQueue(Flask):
             ticket = self.queue.pop(ticket_index)
             
             # Fazer chamada à outra API para mostrar o conteúdo na tela
-            display_response = requests.post(self.url, json={
+            display_response = requests.post(self.url_panel_desktop, json={
                 'name': name,
                 'document_number': document_number,
                 'ticket_number':ticket_number})
+            requests.post(self.url_panel_smartphone, json={
+                'name': name,
+                'document_number': document_number,
+                'ticket_number':ticket_number})
+            
             if display_response.status_code == 200:
                 with open('tickets.txt','a') as file:
                     
