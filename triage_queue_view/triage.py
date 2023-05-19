@@ -19,6 +19,7 @@ class TriageQueue(Flask):
         self.route('/favicon.ico')(self.favicon)
         self.route('/queue', methods=['GET'])(self.view_queue)
         self.route('/call', methods=['POST'])(self.call_in_panel_view)
+        self.route('/delete_queue', methods=['POST'])(self.delete_queue)
         self.route('/', methods=['GET', 'POST'])(self.index)
 
     def favicon(self):
@@ -59,6 +60,17 @@ class TriageQueue(Flask):
             return render_template('index.html', sucesso=True, nome=nome)
         return render_template('index.html')
 
+    def delete_queue(self):
+        name = request.form['name']
+        ticket_document_number = request.form['document_number']
+        ticket_number = request.form['ticket_number']
+        payload=f'name={name}&document_number={ticket_document_number}&ticket_number={ticket_number}'
+        headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        requests.request(method="DELETE",url=self.url_api_get_queue, headers=headers, data=payload)
+        return redirect(url_for('view_queue'))
+    
 if __name__ == '__main__':
     app = TriageQueue(ip="localhost")
     app.run(port=5002, debug=True)
