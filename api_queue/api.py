@@ -13,13 +13,11 @@ class ApiQueue(Flask):
         self.route('/queue', methods=['POST'])(self.emit_ticket)
         self.route('/call', methods=['POST'])(self.call_ticket)
         self.route('/queue', methods=['DELETE'])(self.delete_queue)
-        
         self.queue = []
         self.current_ticket_number = 1
 
     def get_queue(self):
         return jsonify(self.queue)
-
 
     def emit_ticket(self):
         self.current_ticket_number
@@ -77,7 +75,6 @@ class ApiQueue(Flask):
             
             if display_response.status_code == 200:
                 with open('tickets.txt','a') as file:
-                    
                     file.write(f'\nname:{name}/document_number:{document_number}')
                     file.close()
                     
@@ -90,12 +87,23 @@ class ApiQueue(Flask):
     def delete_queue(self):
         zerar_fila = request.form.get('zerar_fila')
         reiniciar_contagem = request.form.get('reiniciar_contagem')
+        ticket_name = request.form.get('name')
+        ticket_document_number = request.form.get('document_number')
+        ticket_number = request.form.get('ticket_number')
+
         if zerar_fila == 'true':
             self.queue = []
             return jsonify({'message': 'Fila de senhas limpa.'}), 200
         elif reiniciar_contagem == 'true':
             self.current_ticket_number = 1
             return jsonify({'message': 'Contagem de senhas reiniciada.'}), 200
+        
+        elif ticket_name and ticket_document_number and ticket_number:
+            for i, ticket in enumerate(self.queue):
+                if ticket['name'] == ticket_name and ticket['document_number'] == ticket_document_number and ticket['ticket_number'] == ticket_number:
+                    self.queue.pop(i)
+                    return jsonify({'message': 'Senha removida da fila.'}), 200
+            return jsonify({'error': 'Senha não encontrada na fila.'}), 404
         
         
 if __name__ == '__main__':
