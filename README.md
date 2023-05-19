@@ -13,6 +13,17 @@
 </p>
 
 ---
+### Table of contents
+- [SmartEdge-Painel-senha](#smartedge-painel-senha)
+    - [Table of contents](#table-of-contents)
+  - [About The Project](#about-the-project)
+    - [Built With](#built-with)
+    - [Web queue triage](#web-queue-triage)
+    - [Web queue view](#web-queue-view)
+    - [Totem Smartphone](#totem-smartphone)
+    - [How to Start the Server?](#how-to-start-the-server)
+
+---
 
 ## About The Project
 this project allows you to generate tickets for a person, with their name and document number, so that you can call the panel, as needed at the moment, when making the call, it is automatically redirected to the ticket visualization panel, so playing a sound effect to let the person know you called them.
@@ -110,5 +121,5 @@ and go to your browser, the ports for the aplications are:
   Is the Web queue triage
 - *machine_ip*:5003 <br>
   Is the Totem Smartphone
-  
+
 ---
