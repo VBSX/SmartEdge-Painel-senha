@@ -4,134 +4,16 @@
 <html>
 <head>
     <title>Fila</title>
-    <style>
-        /* Reset de margens e preenchimentos */
-        body, h1, table {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Estilo para o cabeçalho */
-        h1 {
-            background-color: #2F55E0;
-            color: #fff;
-            padding: 10px;
-            margin-top: 21px;
-        }
-   
-        /* Estilo para a tabela */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Estilo para o botão de menu */
-        .menu {
-            position: relative;
-            display: inline-block;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-
-        .menu button {
-            background-color: #2F55E0;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .menu-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            padding: 10px;
-            z-index: 1;
-        }
-
-        .menu:hover .menu-content {
-            display: block;
-        }
-
-        .menu-content a {
-            display: block;
-            padding: 5px;
-            color: #000;
-            text-decoration: none;
-        }
-
-        .menu-content a:hover {
-            background-color: #ddd;
-        }
-        .image-git{
-        color: #25D366;
-        height: 32px;
-        font-weight: bold;
-        margin: 32px;
-
-        margin-left: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        }
-
-        /* Estilos responsivos */
-        @media screen and (max-width: 600px) {
-            .menu {
-                display: block;
-                margin: 10px 0;
-            }
-
-            .menu-content {
-                position: static;
-                display: block;
-                background-color: transparent;
-                padding: 0;
-            }
-
-            .menu:hover .menu-content {
-                display: none;
-            }
-        }
-    #header {
-        text-align: center; /* Centraliza o conteúdo horizontalmente */
-        margin-top: 20px; /* Espaçamento superior de 20 pixels */
-    }
-
-    #header img {
-        max-width: 10%; /* Garante que a imagem não ultrapasse a largura máxima do contêiner */
-    }
-
-    </style>
+    <script src="static/scripts/sidebar.js"></script>
+    <link rel="stylesheet" href="static/styles/style_queue.css">
+    <link rel="stylesheet" href="static/styles/style_footer.css">
 </head>
 <body>
     <header>
-        <div id="header">
-            <img src="{{ url_for('static', filename='images/smartedge.png') }}" alt="Logo" />
-        </div>
-    </header>
-    <div id="line-menu">
-        <div class="menu">
-            <button>Menu &#9776;</button>
-            <div class="menu-content">
-                <a href="/">Home</a>
-            </div>
-        </div>
+        {% include 'header.html' %}
         <div>
             <h1>Fila</h1>
         </div>
-    </div>
-    
     <table>
         <tr>
             <th>Nome</th>
@@ -144,29 +26,26 @@
             <td>{{ item['name'] }}</td>
             <td>{{ item['document_number'] }}</td>
             <td>{{ item['ticket_number'] }}</td>
-            <td>
+            <td class="buttons_table">
                 <form action="/call" method="post">
                     <input type="hidden" name="name" value="{{ item['name'] }}">
                     <input type="hidden" name="document_number" value="{{ item['document_number'] }}">
                     <input type="hidden" name="ticket_number" value="{{ item['ticket_number'] }}">
                     <input type="submit" value="Chamar">
                 </form>
+
+                <form action="/delete_queue" method="post">
+                    <input type="hidden" name="name" value="{{ item['name'] }}">
+                    <input type="hidden" name="document_number" value="{{ item['document_number'] }}">
+                    <input type="hidden" name="ticket_number" value="{{ item['ticket_number'] }}">
+                    <input type="submit" value="Deletar da fila">
+                </form>
             </td>
         </tr>
         {% endfor %}
     </table>
     <footer>
-        <div style="margin-bottom:50px;">
-            <div class="image-git">
-                <img src="static/images/github.png" alt="git" class="image-git">
-                    <a href="https://www.github.com/vbsx/" class="image-git" target="_blank">
-                    More Projects >
-                    </a>
-                
-                    <p class="image-git">Copyright ©2023 SmartEdge - Todos os direitos reservados</p>
-            </div>
-        </div>
+        {% include 'footer.html' %}
     </footer>
-    <script src="static/call_ticket.js"></script>
 </body>
 </html>

@@ -15,9 +15,9 @@ else:
     ip_machine = "0.0.0.0"
 
 ticket_visualizator = DisplayApp('', '')
-ticketing_and_queue_manager = TriageQueue(ip=ip_machine)
-api_server = ApiQueue(ip=ip_machine)
-totem_server = TotemPhone(ip_machine, '', '')
+ticketing_and_queue_manager = TriageQueue(ip="127.0.0.1")
+api_server = ApiQueue(ip="127.0.0.1")
+totem_server = TotemPhone("127.0.0.1", '', '')
 
 def start_api_server():
     if debug_server:

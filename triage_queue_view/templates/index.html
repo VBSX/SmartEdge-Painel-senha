@@ -3,135 +3,18 @@
 <head>
     <title>Adicionar Fila</title>
     <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
-    <style>
-        body{
-            margin: 0;
-        }
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f8f8;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        h1 {
-            background-color: #2F55E0;
-            color: #fff;
-            padding: 10px;
-            margin-top: 21px;
-        }
-        .form-container h2 {
-            text-align: center;
-        }
-
-        .form-container label, .form-container input {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .form-container input[type="submit"] {
-            margin-top: 10px;
-            background-color: #2F55E0;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-              
-        .menu {
-            position: relative;
-            display: inline-block;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-
-        .menu button {
-            background-color: #2F55E0;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .menu-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            padding: 10px;
-            z-index: 1;
-        }
-
-        .menu:hover .menu-content {
-            display: block;
-        }
-
-        .menu-content a {
-            display: block;
-            padding: 5px;
-            color: #000;
-            text-decoration: none;
-        }
-
-        .menu-content a:hover {
-            background-color: #ddd;
-        }
-    
-        .mensagem-sucesso {
-            background-color: #4CAF50; 
-            color: #fff; 
-            padding: 10px; 
-            margin-top: 10px; 
-        }
-
-        #header {
-            text-align: center; 
-            margin-top: 20px; 
-        }
-
-        #header img {
-            max-width: 10%; 
-        }
-
-        .image-git{
-        color: #25D366;
-        height: 32px;
-        font-weight: bold;
-        margin: 32px;
-
-        margin-left: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        
-        }
-        .mensagem-sucesso-ver-fila {
-            display: flex;
-            margin-top: 8px
-        }
-        .mensagem-sucesso-ver-fila div{
-
-            margin-right: 6px;
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="static/styles/style_index.css">
+    <script src="static/scripts/sidebar.js"></script>
 </head>
 <body>
-    <header>
-        <div id="header">
-            <img src="{{ url_for('static', filename='images/smartedge.png') }}" alt="Logo" />
-        </div>
-    </header>
-    <div id="line-menu">
-        <div class="menu">
-            <button>Menu &#9776;</button>
-            <div class="menu-content">
-                <a href="/queue">Fila</a>
-            </div>
-        </div>
-        <div>
-            <h1>Gerar Senha</h1>
-        </div>
-    </div>
+<header >
+{% include 'header.html' %}
+<div>
+    <h1>Gerar Senha</h1>
+</div>
+
+</header>
     <div class="form-container">
         <h2>Colocar na Fila</h2>
         <form method="post" action="/" id="form-adicionar-fila">
@@ -157,23 +40,8 @@
             </div>
             {% endif %}
     </div>
-    <script>
-        document.getElementById('form-adicionar-fila').addEventListener('submit', function(event) {
-            var nome = document.getElementById('nome').value; // Obtém o valor do campo nome
-            // Atualiza a mensagem de sucesso com o nome adicionado
-            document.getElementById('mensagem-sucesso').innerHTML = 'Sucesso ao adicionar: ' + nome;
-        });
-    </script>
-    <footer>
-        <div style="margin-bottom:50px;">
-            <div class="image-git">
-                <img src="static/images/github.png" alt="git" class="image-git">
-                    <a href="https://www.github.com/vbsx/" class="image-git" target="_blank">
-                    More Projects >
-                    </a>
-                    <p class="image-git">Copyright ©2023 SmartEdge - Todos os direitos reservados</p>
-            </div>
-        </div>
-    </footer>
+<footer>
+{% include 'footer.html' %}
+</footer>
 </body>
 </html>
