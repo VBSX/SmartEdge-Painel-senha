@@ -12,6 +12,8 @@ class ApiQueue(Flask):
         self.route('/queue', methods=['GET'])(self.get_queue)
         self.route('/queue', methods=['POST'])(self.emit_ticket)
         self.route('/call', methods=['POST'])(self.call_ticket)
+        self.route('/queue', methods=['DELETE'])(self.delete_queue)
+        
         self.queue = []
         self.current_ticket_number = 1
 
@@ -84,6 +86,17 @@ class ApiQueue(Flask):
                 return jsonify({'error': 'Erro ao chamar a senha ou mostrar o conteúdo na tela.'}), 500
         else:
             return jsonify({'error': f'Senha com nome "{name}" não encontrada na fila.'}), 404
+        
+    def delete_queue(self):
+        zerar_fila = request.form.get('zerar_fila')
+        reiniciar_contagem = request.form.get('reiniciar_contagem')
+        if zerar_fila == 'true':
+            self.queue = []
+            return jsonify({'message': 'Fila de senhas limpa.'}), 200
+        elif reiniciar_contagem == 'true':
+            self.current_ticket_number = 1
+            return jsonify({'message': 'Contagem de senhas reiniciada.'}), 200
+        
         
 if __name__ == '__main__':
     app = ApiQueue(ip="localhost")
