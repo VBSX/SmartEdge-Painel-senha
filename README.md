@@ -28,7 +28,8 @@ Is used an API builded in Flask to register new ticket on queue and call the nex
 * [Python](https://python.org)
 
 ---
-### web queue triage
+
+### Web queue triage
 Here is where we can put the person's data so we can call later.
 
 <br />
@@ -52,7 +53,7 @@ After that we can see the generated tickt for the person, we can call the tickt 
 
 ---
 
-### web queue view
+### Web queue view
 After we call the ticket, we have to see the ticket called and to see that have the web queue view, here is where we can see the ticked number and the name of person called. After each ticked called, have a song effect to alert that web panel is calling someone.
 
 <br />
@@ -85,3 +86,29 @@ This can be used to user get your password, generating with your name and docume
 </a>
 <img src="github/images/ticket_view_smartphone.png" alt='Logo-Smart-edge' width="700px" ></img>
 </a>
+
+
+---
+
+### How to Start the Server?
+
+First acess the directory what the file is in your prompt, and install the dependences with:
+```
+pip install -r requirements.txt
+```
+Now just start the **main.py**
+
+and go to your browser, the ports for the aplications are:
+
+- *machine_ip*:5001 <br>
+  is the api server
+
+- *machine_ip*:5001 <br>
+  Is the Web queue view
+
+- *machine_ip*:5002 <br>
+  Is the Web queue triage
+- *machine_ip*:5003 <br>
+  Is the Totem Smartphone
+  
+---
